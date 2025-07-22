@@ -12,7 +12,13 @@ const getOneProduct = async (productId) => {
   return await getProduct(productId);
 };
 
+// const getOneProduct = async (productId) => {
+//   const products = await getAllProducts();
+//   return await products.find((product) => product.id === productId);
+// };
+
 const deleteOneProduct = async (productId) => {
+  console.log(typeof productId);
   await deleteProduct(productId);
 };
 

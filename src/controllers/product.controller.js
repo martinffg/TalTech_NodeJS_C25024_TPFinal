@@ -37,9 +37,15 @@ const createProduct = async (req, res) => {
 };
 
 const getProductById = async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
-    const producto = await productService.getOneProduct(id);
+    if (!id) {
+        return res.status(400).json({ message: "El ID es requerido" });
+    }
+    
+    const producto = await productService.getOneProduct(parseInt(id));
+    console.log(producto);
+    
     if (!producto) {
       return res.status(404).json({ message: "Producto no encontrado" });
     }
@@ -47,15 +53,18 @@ const getProductById = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: "error interno del servidor", error: error.message });
+      .json({ message: "Error interno del servidor", error: error.message });
   }
 };
 
 const deleteProductById = async (req, res) => {
+  const { id } = req.params;
   //console.log("id_controller:",id);
   try {
-    const { id } = req.params;
-    await productService.deleteOneProduct(id);
+    if (!id) {
+        return res.status(400).json({ message: "El ID es requerido" });
+    }
+    await productService.deleteOneProduct(paseInt(id));
     console.log("Document successfully deleted!");
     res.status(200).json({ message: "Producto eliminado." });
   } catch (error) {

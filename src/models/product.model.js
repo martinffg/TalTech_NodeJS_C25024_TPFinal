@@ -36,34 +36,37 @@ export const saveProduct = async (product) => {
 
 export const getProduct = async (productId) => {
   try {
-    //console.log("productId_model:",productId);
-    //const docRef = doc(db, "productos", productId);
-    //const docSnap = await getDoc(docRef);
-    //const docSnap = await db.collection("productos").doc(productId).get();
-    //const docSnap = await getDoc(productCollection,productId);
-    //console.log("docSnap:");// ,productCollection.doc(productId).get());
-    //   if (docSnap.exists()) {
-    //   console.log("Document data:", docSnap.data());
-    //   // productRes = docSnap.data();
-    //   productRes = { id: docSnap.id, ...docSnap.data() };
-    //   console.log("productRes:",productRes);
-    //   } else {
-    //   // doc.data() y productRes will be undefined in this case
-    //   console.log("No such document!");
-    //  }  
-    // DEJO LAS LINEAS COMENTADAS PORQUE NO PUDE HACER ANDAR EL GETDOC DE NINGUNA FORMA.
-    const productRes = [];
-    productRes = await getAllProducts();
-    console.log(productRes);
+    const productRes = await getAllProducts();
     return await productRes.find((producto) => producto.id === productId);
+
   } catch (error) {
     throw new Error("Error", error.message);
   }
 };
 
+// SE COMENTAN ESTAS LÍNEAS PROPUETAS EN LA DOC DE FIREBASE AL NO FUNCIONAR Y SE OPTA POR LA VERSION ANTERIOR DEL METODO
+// export const getProduct = async (documentId) => {
+//   try {
+//     const docRef = doc(db, "productos", documentId);
+//     const docSnap = await getDoc(docRef);
+
+//     if (docSnap.exists()) {
+//       console.log("Document data:", docSnap.data());
+//       console.log("Document ID:", docSnap.id);
+//       return docSnap.data();
+//     } else {
+//       console.log("No such document!");
+//       return null;
+//     }
+//   } catch (error) {
+//     console.error("Error getting document:", error);
+//     throw error;
+//   }
+// }
+
+// EN LA DOC DE FIREBASE FIGURA ASI EL METODO Y AUN ASÌ NO FUNCIONA.
 export const deleteProduct = async (productId) => {
   try {
-    console.log("productId_model:",id);
     const docRef = doc(db, "productos", productId);
     await deleteDoc(docRef);
     console.log("Document successfully deleted!");
