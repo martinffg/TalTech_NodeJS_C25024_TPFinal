@@ -36,4 +36,33 @@ const createProduct = async (req, res) => {
   }
 };
 
-export default { getProducts, createProduct };
+const getProductById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const producto = await productService.getOneProduct(id);
+    if (!producto) {
+      return res.status(404).json({ message: "Producto no encontrado" });
+    }
+    res.status(200).json({ payload: producto });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "error interno del servidor", error: error.message });
+  }
+};
+
+const deleteProductById = async (req, res) => {
+  //console.log("id_controller:",id);
+  try {
+    const { id } = req.params;
+    await productService.deleteOneProduct(id);
+    console.log("Document successfully deleted!");
+    res.status(200).json({ message: "Producto eliminado." });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "error interno del servidor", error: error.message });
+  }
+};
+
+export default { getProducts, createProduct, getProductById, deleteProductById };

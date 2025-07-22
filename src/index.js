@@ -4,7 +4,7 @@ import productRoutes from "./routes/product.route.js";
 import authRoutes from "./routes/auth.route.js";
 // import {db}from './config/db.js'
 import { envs } from "./config/envs.js";
-import { authentication } from "./middlewares/auth.middleware.js";
+//import { authentication } from "./middlewares/auth.middleware.js";
 //settings
 const app = express();
 app.set("PORT", envs.port);
@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(authentication)
 //routes
 app.get("/", (req, res) => {
-  res.json({ title: "Home Page" });
+  res.json({ title: "Home Page del Repositorio Para TP Final Martín Federico Fernandez Gamen - Talento Tech - NodeJS - Com 25024" });
 });
 app.use("/auth", authRoutes);
 // app.use("/api/products",authentication, productRoutes);
