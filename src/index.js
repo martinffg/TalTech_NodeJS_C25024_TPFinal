@@ -1,4 +1,5 @@
 import express from "express";
+import cors from 'cors'
 import { join, __dirname } from "./utils/index.js";
 import productRoutes from "./routes/product.route.js";
 import authRoutes from "./routes/auth.route.js";
@@ -15,6 +16,14 @@ app.use(express.json());
 app.use(express.static(join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 // app.use(authentication)
+
+// const corsOptions = {
+//   //origin: 'http://127.0.0.1:5000',
+//   methods: ["GET","POST","DELETE","PUT"],
+// };
+//app.use(cors(corsOptions));
+app.use(cors());
+
 //routes
 app.get("/", (req, res) => {
   res.json({ title: "Home Page del Repositorio Para TP Final Martín Federico Fernandez Gamen - Talento Tech - NodeJS - Com 25024" });
