@@ -17,12 +17,12 @@ app.use(express.static(join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 // app.use(authentication)
 
-const corsOptions = {
+//const corsOptions = {
 //   //origin: 'http://127.0.0.1:5000',
-   methods: ["GET","POST","DELETE","PUT"],
-};
-app.use(cors(corsOptions));
-//app.use(cors());
+//   methods: ["GET","POST","DELETE","PUT"],
+//};
+//app.use(cors(corsOptions));
+app.use(cors());
 
 //routes
 app.get("/", (req, res) => {
