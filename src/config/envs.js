@@ -12,7 +12,7 @@ export const envs = {
   },
   port: process.env.PORT || 5000,
   secrets:{
-    jwt_secret: process.env.JWT_SECRET || "xssqakjdkjhdkjhd",
-    session: process.env.SESSION_KEY || 'kjhskjhdskjh'
+    jwt_secret: process.env.JWT_SECRET, // || "xssqakjdkjhdkjhd",
+    session: process.env.SESSION_KEY    // || 'kjhskjhdskjh'
   }
 };

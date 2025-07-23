@@ -1,5 +1,6 @@
 // controller
 import productService from "../services/product.service.js";
+
 const getProducts = async (req, res) => {
   try {
     const products = await productService.getAll();
@@ -13,8 +14,7 @@ const getProducts = async (req, res) => {
 const createProduct = async (req, res) => {
   try {
     const { nombre, precio, disponible } = req.body;
-    console.log(req.body);
-
+    
     // validar campos
     const newProduct = {
       id : new Date().getTime(),
@@ -44,8 +44,7 @@ const getProductById = async (req, res) => {
     }
     
     const producto = await productService.getOneProduct(parseInt(id));
-    console.log(producto);
-    
+       
     if (!producto) {
       return res.status(404).json({ message: "Producto no encontrado" });
     }
@@ -57,20 +56,20 @@ const getProductById = async (req, res) => {
   }
 };
 
+
 const deleteProductById = async (req, res) => {
   const { id } = req.params;
-  //console.log("id_controller:",id);
   try {
-    if (!id) {
-        return res.status(400).json({ message: "El ID es requerido" });
+    const deleted = await productService.deleteOneProduct(id);
+    if (!deleted) {
+      return res.status(404).json({ error: "Producto No Encontrado." });
     }
-    await productService.deleteOneProduct(paseInt(id));
     console.log("Document successfully deleted!");
-    res.status(200).json({ message: "Producto eliminado." });
+    res.status(204).json({ message: "Producto eliminado." });
   } catch (error) {
     res
-      .status(500)
-      .json({ message: "error interno del servidor", error: error.message });
+    .status(500)
+    .json({ message: "error interno del servidor", error: error.message });
   }
 };
 

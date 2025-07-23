@@ -44,32 +44,29 @@ export const getProduct = async (productId) => {
   }
 };
 
-// SE COMENTAN ESTAS LÍNEAS PROPUETAS EN LA DOC DE FIREBASE AL NO FUNCIONAR Y SE OPTA POR LA VERSION ANTERIOR DEL METODO
-// export const getProduct = async (documentId) => {
-//   try {
-//     const docRef = doc(db, "productos", documentId);
-//     const docSnap = await getDoc(docRef);
-
-//     if (docSnap.exists()) {
-//       console.log("Document data:", docSnap.data());
-//       console.log("Document ID:", docSnap.id);
-//       return docSnap.data();
-//     } else {
-//       console.log("No such document!");
-//       return null;
-//     }
-//   } catch (error) {
-//     console.error("Error getting document:", error);
-//     throw error;
-//   }
-// }
-
 // EN LA DOC DE FIREBASE FIGURA ASI EL METODO Y AUN ASÌ NO FUNCIONA.
-export const deleteProduct = async (productId) => {
+// export const deleteProduct = async (productId) => {
+//   try {
+//     const docRef = doc(db, "productos", productId);
+//     console.log(docRef);
+//     await deleteDoc(docRef);
+//     console.log("Document successfully deleted!");
+//   } catch (error) {
+//     throw new Error("Error removing document:", error.message);
+//   }
+// };
+
+export const deleteProduct = async (id) => {
   try {
-    const docRef = doc(db, "productos", productId);
-    await deleteDoc(docRef);
+    const productRef = doc(productCollection, id);
+    const snapshot = await getDoc(productRef);
+
+    if (!snapshot.exists()) {
+      return false;
+    }
+    await deleteDoc(productRef);
     console.log("Document successfully deleted!");
+    return true;
   } catch (error) {
     throw new Error("Error removing document:", error.message);
   }
