@@ -43,18 +43,6 @@ export const saveProduct = async (product) => {
   }
 };
 
-// EN LA DOC DE FIREBASE FIGURA ASI EL METODO Y AUN ASÌ NO FUNCIONA.
-// export const deleteProduct = async (productId) => {
-//   try {
-//     const docRef = doc(db, "productos", productId);
-//     console.log(docRef);
-//     await deleteDoc(docRef);
-//     console.log("Document successfully deleted!");
-//   } catch (error) {
-//     throw new Error("Error removing document:", error.message);
-//   }
-// };
-
 export const deleteProduct = async (id) => {
   try {
     const productRef = doc(db, "productos", id);
