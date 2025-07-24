@@ -1,9 +1,10 @@
 import { generateToken } from "../utils/jwt.js";
+import 'dotenv/config';
 
 const default_user = {
   id: 1,
-  email: "admin@admin.com",
-  password: "password123",
+  email: process.env.EMAIL,
+  password: process.env.PASSWORD,
 };
 
 const login = async (req, res) => {
@@ -16,4 +17,4 @@ const login = async (req, res) => {
   }
 };
 
-export default { login };
+export default { login }; 

@@ -4,16 +4,17 @@ import { getAllProducts, saveProduct, getProduct, deleteProduct } from "../model
 const getAll = async () => {
   return await getAllProducts();
 };
-const createProduct = async (product) => {
-  return await saveProduct(product);
-};
 
 const getOneProduct = async (productId) => {
   return await getProduct(productId);
+};
+
+const createProduct = async (product) => {
+  return await saveProduct(product);
 };
 
 const deleteOneProduct = async (productId) => {
   return await deleteProduct(productId);
 };
 
-export default { getAll, createProduct, getOneProduct, deleteOneProduct };
+export default {getAll,getOneProduct,createProduct,deleteOneProduct};

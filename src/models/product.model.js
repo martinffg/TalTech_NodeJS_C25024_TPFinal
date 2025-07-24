@@ -25,20 +25,19 @@ export const getAllProducts = async () => {
   }
 };
 
-export const saveProduct = async (product) => {
+export const getProduct = async (productId) => {
   try {
-    const newProduct = await addDoc(productCollection, product);
-    return newProduct
+    const productRes = await getAllProducts();
+    return productRes.find((producto) => producto.id === productId);
   } catch (error) {
     throw new Error("Error", error.message);
   }
 };
 
-export const getProduct = async (productId) => {
+export const saveProduct = async (product) => {
   try {
-    const productRes = await getAllProducts();
-    return await productRes.find((producto) => producto.id === productId);
-
+    const newProduct = await addDoc(productCollection, product);
+    return newProduct
   } catch (error) {
     throw new Error("Error", error.message);
   }
@@ -58,16 +57,18 @@ export const getProduct = async (productId) => {
 
 export const deleteProduct = async (id) => {
   try {
-    const productRef = doc(productCollection, id);
-    const snapshot = await getDoc(productRef);
-
-    if (!snapshot.exists()) {
-      return false;
+    const productRef = doc(db, "productos", id);
+    const productSnapshot = await getDoc(productRef);
+    let encontrado;
+    if (!productSnapshot.exists()) {
+      encontrado= false;
+    } else {
+      await deleteDoc(productRef);
+      console.log("El producto fue borrado correctamente."); 
+      encontrado= true;
     }
-    await deleteDoc(productRef);
-    console.log("Document successfully deleted!");
-    return true;
+    return encontrado;
   } catch (error) {
-    throw new Error("Error removing document:", error.message);
+    throw new Error(`Error al intentar borrar producto: ${id}.  Detalle: `, error.message);
   }
 };

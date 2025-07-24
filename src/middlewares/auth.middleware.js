@@ -1,4 +1,5 @@
 import { verifyToken } from "../utils/jwt.js";
+import 'dotenv/config';
 
 export const authentication = (req, res, next) => {
   const token = req.headers["authorization"]?.split(" ")[1];
